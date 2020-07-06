@@ -1,0 +1,21 @@
+name: Acorn
+version: ${project.version}
+main: xyz.aunto.acorn.Acorn
+api-version: 1.15
+prefix: ACORN
+load: STARTUP
+authors: [sysollie]
+description: An Anti-Cheat for Spigot 1.15.
+commands:
+  acorn:
+    description: View Acorn's information
+    usage: /acorn
+  acorn-reload:
+    description: Reload Acorn's configuration file
+    usage: /acorn-reload
+  acorn-checks:
+    description: View Acorn's checks
+    usage: /acorn-checks
+  acorn-gui:
+    description: View Acorn's checks but in a GUI
+    usage: /acorn-gui

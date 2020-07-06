@@ -1,0 +1,340 @@
+# WELCOME TO ACORN!
+# Acorn is a new AntiCheat that is made to be simple. No need for all of those confusing commands,
+# Acorn just works out of the box. No configuration is needed unless you want to fine tune your
+# experience.
+#
+# PLACEHOLDERS:
+# In this file, you may be able to use placeholders. Here are the ones you can use:
+#   %player% - Represents the player who triggered the check.
+#   %location% - Represents the player's X, Y and Z coordinates.
+#   %check% - Represents the check that they failed.
+#   %check_message% - The friendly message for the check.
+#   %vl% - Represents their VL.
+#
+# NOTE:
+# If you see a hack not listed, it doesn't mean Acorn doesn't detect it. Many checks will detect
+# multiple hacks or cheats. For example, the CPS check can detect the "Nuker" hack as it attempts
+# to click way faster than the preset limit and the Y Level Monitoring feature can detect glide and
+# phase due to the way they work.
+#
+#
+# Copyright: sysollie & Aunto Development 2020 - All Rights Reserved
+
+
+
+
+# ----------------------------------------------------------------------
+# DEV OPTIONS
+# ----------------------------------------------------------------------
+
+# Increases console output, also causes a lot of spam.
+dev: false
+
+# Broadcasts EVERYTHING Acorn does. Do not enable this on a live server!
+debug: false
+
+
+
+# ----------------------------------------------------------------------
+# MOVEMENT HACK DETECTION
+# ----------------------------------------------------------------------
+
+# The fly check - Detects when players are flying illegally.
+fly:
+  # Enable the fly check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their movement? I recommend you set this very low!
+    cancel: 10
+
+    # When should Acorn start teleporting the player to the ground?
+    teleport: 16
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 17
+
+    # When should Acorn kick the player?
+    kick: 34
+
+    # Should Acorn teleport the player to the ground when they are kicked?
+    teleport-on-kick: true
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # Y Level Monitoring allows Acorn to detect fly hackers VERY quickly. Some fly hacks such as
+  # "vanilla" tell the server that the player is not on the ground whilst making it look like they
+  # are. Acorn can detect this and raise the player's VL level. This feature also lowers the amount
+  # of false positives for fly. I recommend you don't disable this.
+  Y-level-monitoring:
+    # Should Y Level Monitoring be used to detect hackers? (False positive reduction is always enabled.)
+    enabled: true
+
+    # What Y Level Monitoring VL should be required before flagging this user and raising their fly VL?
+    # You should probably just leave this at 10, I've found 10 is perfect for this.
+    vl-required: 10
+
+    # How long should Acorn remember the player's last ground position? 1 is a good option here but
+    # if you are experiencing issues with this feature, try raising this to 2 or 3. Don't raise it
+    # too high as it reduces the sensitivity of the fly check.
+    ground-log-life: 1
+
+  # Ignore the player if they are near water. This fixes a few bugs but may allow players to bypass
+  # the check for a short amount of time. Although it allows them to bypass, bypassing takes a lot
+  # of effort and really isn't worth it.
+  ignore-near-water: true
+
+  # How strict should Acorn be when detecting players? If you are on a server which cannot cope with
+  # checking players every time they move or this is causing lag, you can set this to "light". I
+  # recommend you stick with "strict" if you can. Acorn will detect cheaters quicker and their VL
+  # will increase on every illegal movement instead of when they try to move block.
+  #
+  # MODES:
+  #   light - Check per block movement [More Efficient]
+  #   strict - Check on all movement [Catches Quicker]
+  mode: "strict"
+
+# The boat fly check - Detects when players are flying whilst inside boats.
+boatfly:
+  # Enable the boat fly check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their movement? This is a dangerous setting to change.
+    cancel: 1
+
+    # When should Acorn start forcing the player to leave their boat?
+    leave: 5
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 5
+
+    # When should Acorn kick the player?
+    kick: 8
+
+    # When should Acorn ban the player?
+    ban: 0
+
+# The phase check - Detects when players are phasing through blocks.
+phase:
+  # Enable the phase check.
+  enabled: false # <---- DO NOT ENABLE! CURRENTLY DOESN'T WORK CORRECTLY.
+
+  actions:
+    # When should Acorn start canceling their movement? This is a dangerous setting to change.
+    cancel: 1
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 10
+
+    # When should Acorn kick the player?
+    kick: 23
+
+    # When should Acorn ban the player?
+    ban: 0
+
+# The jesus check - Detects when players are walking on water.
+jesus:
+  # Enable the jesus check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their movement? I recommend you set this very low!
+    cancel: 2
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 8
+
+    # When should Acorn kick the player?
+    kick: 23
+
+    # When should Acorn ban the player?
+    ban: 0
+
+# The speed check - Detects when players are going way faster than they should.
+speed:
+  # Enable the speed check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their movement? I recommend you set this very low!
+    cancel: 2
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 8
+
+    # When should Acorn kick the player?
+    kick: 23
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # The speed which should be seen as the "maximum". Only change this if you really know what you are
+  # doing and know the consequences. I set this high so players aren't caught for falling or swimming
+  # but will be caught if they are using blatant speed.
+  allowed-speed: 20
+
+
+
+# ----------------------------------------------------------------------
+# COMBAT HACK DETECTION
+# ----------------------------------------------------------------------
+
+# The reach check - Detects when players are hitting entities outside of their reach
+reach:
+  # Enable the reach check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their their malicious attacks? I recommend 1 so all that
+    # are detected get cancelled.
+    cancel: 1
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 4
+
+    # When should Acorn kill the player? Remember, you can disable this using 0!
+    kill: 0
+
+    # When should Acorn kick the player?
+    kick: 11
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # I highly recommend you do NOT change this. The reach limit in Vanilla Minecraft is 3 blocks. The
+  # default is 0.05 above that to protect slightly laggy players.
+  reach-limit: 3.05
+
+# The CPS limit check - Detects when players are clicking WAY to fast. This check can also detect
+# players who are using the "Nuker" hack so I really recommend you don't disable this.
+cps:
+  # Enable the CPS limit check.
+  enabled: true
+
+  actions:
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 2
+
+    # When should Acorn kill the player? Remember, you can disable this using 0!
+    kill: 0
+
+    # When should Acorn kick the player?
+    kick: 5
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # What should be seen as the limit for clicks per second? I recommend you set this way higher than
+  # normal. Most hackers I have seen auto-click at 30+ CPS.
+  cps-limit: 24
+
+# The knockback check - Detects when players attempt to avoid knockback.
+knockback:
+  # Enable the knockback check.
+  enabled: true
+
+  actions:
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 2
+
+    # When should Acorn kill the player? Remember, you can disable this using 0!
+    kill: 0
+
+    # When should Acorn kick the player?
+    kick: 5
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # When should the player be flagged? I recommend you leave this at 0, this will mean players
+  # who completely avoid knockback will be flagged.
+  flag: 0
+
+  # How many ticks should Acorn wait before checking to see if the player took knockback? The higher
+  # this number, the less sensitive. Higher numbers help to protect laggy players. Keep this at 6
+  # if you don't know what you are doing!
+  time: 6
+
+
+
+# ----------------------------------------------------------------------
+# PLAYER HACK DETECTION
+# ----------------------------------------------------------------------
+
+# The Interact Reach check. - Detects players who attempt to interact with a block out of reach.
+interactreach:
+  # Enable the Interact Reach check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their interactions? Set this to 1 so Acorn always prevents
+    # malicious interacts.
+    cancel: 1
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 2
+
+    # When should Acorn kick the player?
+    kick: 5
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # What should the block reach limit be? Leave this alone if you don't know what this is.
+  limit: 6.5
+
+
+
+# ----------------------------------------------------------------------
+# WORLD HACK DETECTION
+# ----------------------------------------------------------------------
+
+# The Fast Place check. - Detects when players try and place blocks too fast.
+fastplace:
+  # Enable the Fast Place check.
+  enabled: true
+
+  actions:
+    # When should Acorn start canceling their invalid block places? 1 blocks all invalid placement.
+    cancel: 1
+
+    # When should Acorn alert players with the "acorn.notify" permission?
+    alert: 11
+
+    # When should Acorn kick the player?
+    kick: 23
+
+    # When should Acorn ban the player?
+    ban: 0
+
+  # The amount of time (in milliseconds) that should be seen as the limit. I recommend you leave this
+  # at 100 milliseconds, this allows a little lag but detects most fast place hacks.
+  cooldown: 100
+
+
+
+# ----------------------------------------------------------------------
+# OTHER CONFIG
+# ----------------------------------------------------------------------
+
+# How long (in seconds) should violation levels survive?
+vl-expiry: 40
+
+# Here, you can configure some messages!
+messages:
+  # Sent to players who have the "acorn.notify" permission when an alert is triggered.
+  alert: "&6&lACORN  &e%player% &7is attempting to &c%check_message%&7. Their VL is &e%vl% &7and their location is &e%location%&7."
+
+  # Sent to players who have the "acorn.notify" permission when a player is kicked.
+  kickalert: "&6&lACORN  &e%player% &7has been kicked for attempting to &c%check_message%&7. Their last location was &e%location%&7 and their VL was &e%vl%&7."
+
+  # Shown to players who are kicked by Acorn.
+  kick: "&6&lACORN  &8>  &rYou were kicked for attempting to &c%check_message%&r. Turn off your hacks!"
+
+  # Sent to players who have the "acorn.notify" permission when a player is banned.
+  banalert: "&6&lACORN  &e%player% &7has been banned for attempting to &c%check_message%&7. Their VL for the &e%check% &7check was &e%vl%&7."
+
+  # Shown to players who are banned by Acorn.
+  ban: "&6&lACORN  &8>  &rYou were &4banned &rfor attempting to &c%check_message%&r."
