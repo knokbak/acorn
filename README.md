@@ -12,6 +12,7 @@ Spigot and Bukkit are inherently trusting of clients and the data sent by player
 - Just works
 
 ## Blocked hacks
+Acorn probably does detect more hacks than the ones below!
 ### Combat
 - Autoclickers
 - Some kinds of KillAura
