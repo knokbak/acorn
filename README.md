@@ -23,6 +23,7 @@ Acorn probably does detect more hacks than the ones below!
 - Fly
 - Glide
 - BoatFly
+- JetPack
 - Jesus
 - Speed
 - Spider
