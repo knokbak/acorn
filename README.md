@@ -11,6 +11,28 @@ Spigot and Bukkit are inherently trusting of clients and the data sent by player
 - Custom alert messages
 - Just works
 
+## Blocked hacks
+### Combat
+- Autoclickers
+- Some kinds of KillAura
+- Anti-Knockback
+- Reach
+- FastBow
+### Movement
+- Fly
+- Glide
+- BoatFly
+- Jesus
+- Speed
+- Spider
+- Phase (once the player has left the block)
+### Player
+- InteractReach
+### World
+- Nuker
+- FastPlace
+
+
 ## What is Acorn best at?
 In my opinion, Acorn is really good at detecting illegal flying and reach.
 
