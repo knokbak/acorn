@@ -1,6 +1,9 @@
 # Acorn Anti-Cheat
 Acorn is a new Anti-Cheat for Spigot 1.15. Acorn is free to use and can quickly detect hackers.
 
+## Why do I need an Anti-Cheat?
+Spigot and Bukkit are inherently trusting of clients and the data sent by players. This does have its benifits but can be an issue. Because of this, you should use an Anti-Cheat. An Anti-Cheat will monitor what players do and can cancel invalid or malicious actions such as flying.
+
 ## Features
 - Really, really quick fly detection
 - Automatic punishments (cancel action, teleport back to name a couple)
