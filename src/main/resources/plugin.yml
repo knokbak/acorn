@@ -16,6 +16,3 @@ commands:
   acorn-checks:
     description: View Acorn's checks
     usage: /acorn-checks
-  acorn-gui:
-    description: View Acorn's checks but in a GUI
-    usage: /acorn-gui
