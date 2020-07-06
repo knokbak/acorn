@@ -1,5 +1,5 @@
 name: Acorn
-version: ${project.version}
+version: BETA-1.0
 main: xyz.aunto.acorn.Acorn
 api-version: 1.15
 prefix: ACORN
