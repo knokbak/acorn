@@ -1,16 +1,10 @@
 package xyz.aunto.acorn;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.Permission;
 import xyz.aunto.acorn.files.CustomConfig;
 
@@ -21,11 +15,7 @@ import xyz.aunto.acorn.checks.world.*;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-
 public final class Acorn extends JavaPlugin {
-    ItemStack[] acornGUI;
-
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -51,7 +41,7 @@ public final class Acorn extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CPS(), this);
         getServer().getPluginManager().registerEvents(new AntiKockback(), this);
         getServer().getPluginManager().registerEvents(new NoFallDamage(), this);
-        getServer().getPluginManager().registerEvents(new FastBow(), this);
+        //getServer().getPluginManager().registerEvents(new FastBow(), this);
         getServer().getPluginManager().registerEvents(new InteractReach(), this);
         getServer().getPluginManager().registerEvents(new FastPlace(), this);
         if(CustomConfig.get().getBoolean("dev")) getLogger().info("Registered event listeners!");
@@ -118,7 +108,7 @@ public final class Acorn extends JavaPlugin {
             } else message += "&cFly&7, ";
 
             if(CustomConfig.get().getBoolean("fly.Y-level-monitoring.enabled")){
-                message += "&aYLevelMonitoring&7, ";
+                message += "&aY Level Monitoring&7, ";
             } else message += "&cYLevelMonitoring&7, ";
 
             if(CustomConfig.get().getBoolean("boatfly.enabled")){
@@ -145,6 +135,20 @@ public final class Acorn extends JavaPlugin {
                 message += "&aCPS&7, ";
             } else message += "&cCPS&7, ";
 
+            if(CustomConfig.get().getBoolean("fastplace.enabled")){
+                message += "&aFastPlace&7, ";
+            } else message += "&cFastPlace&7, ";
+
+            if(CustomConfig.get().getBoolean("fastplace.enabled")){
+                message += "&aFastBow&7, ";
+            } else message += "&cFastBow&7, ";
+
+            if(CustomConfig.get().getBoolean("interactreach.enabled")){
+                message += "&aInteract Reach&7, ";
+            } else message += "&cInteract Reach&7, ";
+
+            message += "&eFastBow&7, ";
+
             if(CustomConfig.get().getBoolean("knockback.enabled")){
                 message += "&aAntiKnockback";
             } else message += "&cAntiKnockback";
@@ -155,18 +159,5 @@ public final class Acorn extends JavaPlugin {
         }
 
         return false;
-    }
-
-    @EventHandler
-    public void clickEvent(InventoryClickEvent event){
-        // If we don't have the GUI cached, don't do anything
-        if(acornGUI == null) return;
-
-        // Make sure the inventory is our inventory
-        Inventory inv = event.getClickedInventory();
-        if(inv.getContents() != acornGUI) return;
-
-        // Cancel the movement
-        event.setCancelled(true);
     }
 }
